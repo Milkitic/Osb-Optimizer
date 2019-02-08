@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Milky.OsbOptimizer">
+    <SolidColorBrush x:Key="ExtraLightBrush" Color="#F0F0F0" />
+    <SolidColorBrush x:Key="LightBrush" Color="#D0D0D0" />
+    <SolidColorBrush x:Key="LightGreyBrush" Color="#A0A0A0" />
+    <SolidColorBrush x:Key="LightGreyBrush20" Color="#20A0A0A0" />
+    <SolidColorBrush x:Key="LightGreyBrush40" Color="#40A0A0A0" />
+    <SolidColorBrush x:Key="LightGreyBrush60" Color="#60A0A0A0" />
+    <SolidColorBrush x:Key="GreyBlueBrush" Color="#6090C0" />
+    <SolidColorBrush x:Key="GreyRedBrushA0" Color="#A0C06050" />
+    <SolidColorBrush x:Key="GreyGreenBrushA0" Color="#A060C050" />
+</ResourceDictionary>
