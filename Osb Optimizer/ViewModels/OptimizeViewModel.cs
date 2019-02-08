@@ -118,7 +118,7 @@ namespace Milky.OsbOptimizer.ViewModels
                         ThreadCount = 2
                     };
                     var compressor = _compressor;
-                    compressor.OnErrorOccured += (object sender, ErrorEventArgs e) =>
+                    compressor.ErrorOccured += (object sender, ErrorEventArgs e) =>
                     {
                         //HoldingArg = e;
                         //HoldingText.AppendLine(e.Message);
@@ -129,7 +129,7 @@ namespace Milky.OsbOptimizer.ViewModels
                         //    Thread.Sleep(1);
                         //}
                     };
-                    compressor.OnProgressChanged += (object sender, ProgressEventArgs e) =>
+                    compressor.ProgressChanged += (object sender, ProgressEventArgs e) =>
                     {
                         //Thread.Sleep(1);
                         Progress = e.Progress / (float)e.TotalCount;
@@ -142,8 +142,8 @@ namespace Milky.OsbOptimizer.ViewModels
                     );
                     IsRunning = false;
                     IsFinished = true;
-                    compressor.OnErrorOccured = null;
-                    compressor.OnProgressChanged = null;
+                    compressor.ErrorOccured = null;
+                    compressor.ProgressChanged = null;
                     Dispose();
                 });
             }
@@ -155,7 +155,7 @@ namespace Milky.OsbOptimizer.ViewModels
             {
                 return new DelegateCommand(arg =>
                 {
-                    HoldingArg.TryToContinue = true;
+                    HoldingArg.Continue = true;
                     Paused = false;
                 });
             }
@@ -167,7 +167,7 @@ namespace Milky.OsbOptimizer.ViewModels
             {
                 return new DelegateCommand(arg =>
                 {
-                    HoldingArg.TryToContinue = false;
+                    HoldingArg.Continue = false;
                     Paused = false;
                 });
             }
