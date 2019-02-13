@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnabledConverter.cs" />
+    <Compile Include="Converters\StringBuilderVisibilityConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -78,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\DetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,6 +95,9 @@
     <Compile Include="ViewModels\OptimizeViewModel.cs" />
     <Compile Include="Windows\AddPageWindow.xaml.cs">
       <DependentUpon>AddPageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DetailWindow.xaml.cs">
+      <DependentUpon>DetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

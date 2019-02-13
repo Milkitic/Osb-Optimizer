@@ -13,7 +13,10 @@
     <Window.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter" />
         <converters:EnabledConverter x:Key="EnabledConverter" />
-   </Window.Resources>
+        <converters:StringBuilderVisibilityConverter x:Key="StringBuilderVisibilityConverter" />
+        <converters:BarWidthConverter x:Key="BarWidthConverter" />
+        <converters:BarWidthConverter2 x:Key="BarWidthConverter2" />
+ </Window.Resources>
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
@@ -38,21 +41,33 @@
                             Margin="0,0,0,-1">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition />
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <ProgressBar
-                                Grid.Column="0" Grid.RowSpan="10"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                Background="Transparent"
-                                Value="{Binding Progress, Mode=OneWay}"
-                                Minimum="0" Maximum="1"
-                                Opacity="0.1" />
+                            <DockPanel Grid.Column="0" Grid.RowSpan="10"
+                                        HorizontalAlignment="Left">
+                                <DockPanel.Width>
+                                    <MultiBinding Converter="{StaticResource BarWidthConverter}" Mode="OneWay"> 
+                                        <Binding Mode="OneWay" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}" Path="ActualWidth" />
+                                        <Binding Mode="OneWay" ElementName="ButtonPanel" Path="ActualWidth" />
+                                    </MultiBinding>
+                                </DockPanel.Width>
+                                <!--<DockPanel.Width>
+                                    <Binding ElementName="ButtonPanel" Path="ActualWidth" Converter="{StaticResource BarWidthConverter2}" />
+                                </DockPanel.Width>-->
+                                <ProgressBar
+                                    HorizontalContentAlignment="Stretch"
+                                    BorderThickness="0"
+                                    BorderBrush="Transparent"
+                                    Background="Transparent"
+                                    Value="{Binding Progress, Mode=OneWay}"
+                                    Minimum="0" Maximum="1"
+                                    Opacity="0.1" />
+                            </DockPanel>
                             <Label Grid.Row="0" Grid.Column="0"
                                    Content="{Binding Name}"
                                    FontSize="16" FontWeight="Bold"
@@ -61,7 +76,8 @@
                                    Content="{Binding FilePath}" 
                                    FontSize="13" 
                                    Foreground="{StaticResource LightGreyBrush}" />
-                            <StackPanel Grid.Row="0" Grid.RowSpan="2"
+                            <StackPanel x:Name="ButtonPanel"
+                                        Grid.Row="0" Grid.RowSpan="2"
                                         Grid.Column="1"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
@@ -74,17 +90,33 @@
                                     </Viewbox.Visibility>
                                     <ContentControl Template="{StaticResource GreenOkControl}"/>
                                 </Viewbox>
-                                <Button Height="24" Width="24"
-                                        Margin="3,0,0,0"
-                                        BorderThickness="0"
-                                        Style="{StaticResource RoundButtonStyle}"
-                                        Background="{StaticResource GreyRedBrushA0}">
-                                    <Button.Content>
-                                        <Viewbox Width="16" Height="16">
-                                            <ContentControl Template="{StaticResource GreyBugControl}" />
-                                        </Viewbox>
-                                    </Button.Content>
-                                </Button>
+                                <StackPanel VerticalAlignment="Center" Width="21">
+                                    <Button Height="18" Width="18"
+                                            Margin="3,0,0,2"
+                                            BorderThickness="0"
+                                            Style="{StaticResource RoundButtonStyle}"
+                                            Background="{StaticResource GreyBlueBrushA0}"
+                                            Visibility="{Binding SituationOutput,Converter={StaticResource StringBuilderVisibilityConverter}}"
+                                            Command="{Binding OpenInfoCommand}">
+                                        <Button.Content>
+                                            <Viewbox Width="14" Height="14">
+                                                <ContentControl Template="{StaticResource GreyInfoControl}" />
+                                            </Viewbox>
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Height="18" Width="18"
+                                            Margin="3,2,0,0"
+                                            BorderThickness="0"
+                                            Style="{StaticResource RoundButtonStyle}"
+                                            Background="{StaticResource GreyRedBrushA0}"
+                                            Visibility="{Binding ErrorOutput,Converter={StaticResource StringBuilderVisibilityConverter}}">
+                                        <Button.Content>
+                                            <Viewbox Width="14" Height="14">
+                                                <ContentControl Template="{StaticResource GreyBugControl}" />
+                                            </Viewbox>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
                                 <Button Height="24" Width="24" 
                                         Margin="3,0,0,0"
                                         BorderThickness="0"

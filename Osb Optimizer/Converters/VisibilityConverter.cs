@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -22,7 +21,7 @@ namespace Milky.OsbOptimizer.Converters
                     return Visibility.Visible;
                 }
 
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
             }
 
             return null;
@@ -33,26 +32,33 @@ namespace Milky.OsbOptimizer.Converters
             throw new NotImplementedException();
         }
     }
-
-    class EnabledConverter : IMultiValueConverter
+    class BarWidthConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length == 2)
             {
-                var isRunning = (bool)values[0];
-                var isFinished = (bool)values[1];
-                if (!isRunning)
-                {
-                    return true;
-                }
-                return false;
+                var winWidth = (double)values[0];
+                var panelWidth = (double)values[1];
+                return winWidth - panelWidth - 25;
             }
 
             return null;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    class BarWidthConverter2 : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return 200;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

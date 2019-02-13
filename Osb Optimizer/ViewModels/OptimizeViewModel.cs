@@ -2,6 +2,7 @@
 using Milky.WpfApi;
 using Milky.WpfApi.Commands;
 using OSharp.Storyboard;
+using OSharp.Storyboard.Events;
 using OSharp.Storyboard.Management;
 using System;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Input;
+using Milky.OsbOptimizer.Windows;
 using ErrorEventArgs = OSharp.Storyboard.ErrorEventArgs;
 
 namespace Milky.OsbOptimizer.ViewModels
@@ -22,7 +24,8 @@ namespace Milky.OsbOptimizer.ViewModels
         private bool _isRunning;
         private bool _isFinished;
 
-        private StringBuilder _holdingText = new StringBuilder();
+        private StringBuilder _situationOutput;
+        private StringBuilder _errorOutput;
 
         private ElementGroup _group;
         private ElementCompressor _compressor;
@@ -32,6 +35,10 @@ namespace Milky.OsbOptimizer.ViewModels
         public string Name { get; }
         public Guid Guid { get; set; } = Guid.NewGuid();
 
+        internal OptimizeViewModel()
+        {
+
+        }
         public OptimizeViewModel(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -91,12 +98,21 @@ namespace Milky.OsbOptimizer.ViewModels
             }
         }
 
-        public StringBuilder HoldingText
+        public StringBuilder SituationOutput
         {
-            get => _holdingText;
+            get => _situationOutput;
             set
             {
-                _holdingText = value;
+                _situationOutput = value;
+                OnPropertyChanged();
+            }
+        }
+        public StringBuilder ErrorOutput
+        {
+            get => _errorOutput;
+            set
+            {
+                _errorOutput = value;
                 OnPropertyChanged();
             }
         }
@@ -109,9 +125,11 @@ namespace Milky.OsbOptimizer.ViewModels
             {
                 return new DelegateCommand(async arg =>
                 {
+                    Dispose();
                     IsFinished = false;
                     IsRunning = true;
-                    //Compressors.Add(new OptimizeInstance(holdingPath));
+                    SituationOutput = new StringBuilder();
+                    ErrorOutput = new StringBuilder();
                     _group = await ElementGroup.ParseFromFileAsync(FilePath);
                     _compressor = new ElementCompressor(_group)
                     {
@@ -120,6 +138,12 @@ namespace Milky.OsbOptimizer.ViewModels
                     var compressor = _compressor;
                     compressor.ErrorOccured += (object sender, ErrorEventArgs e) =>
                     {
+                        if (sender is Element element)
+                        {
+                            ErrorOutput.AppendLine(element.ToString());
+                            ErrorOutput.AppendLine(e.Message);
+                            OnPropertyChanged(nameof(ErrorOutput));
+                        }
                         //HoldingArg = e;
                         //HoldingText.AppendLine(e.Message);
                         //OnPropertyChanged(nameof(HoldingText));
@@ -128,6 +152,24 @@ namespace Milky.OsbOptimizer.ViewModels
                         //{
                         //    Thread.Sleep(1);
                         //}
+                    };
+                    compressor.SituationFound += (object sender, SituationEventArgs e) =>
+                    {
+                        SituationOutput.AppendLine($"Found new element on line {e.Element.RowInSource}:");
+                        SituationOutput.AppendLine($"    {{{e.Element}}}");
+
+                        if (e.Container != null)
+                        {
+                            SituationOutput.AppendLine($"  Inner container:");
+                            SituationOutput.AppendLine($"    {{{e.Container}}}");
+                        }
+
+                        SituationOutput.AppendLine($"  Events involved:");
+                        SituationOutput.AppendLine(string.Join(Environment.NewLine, e.Events.Select(k => $"    {k}")));
+                        SituationOutput.AppendLine($"  Message:");
+                        SituationOutput.AppendLine($"    {e.Message}");
+                        SituationOutput.AppendLine();
+                        OnPropertyChanged(nameof(SituationOutput));
                     };
                     compressor.ProgressChanged += (object sender, ProgressEventArgs e) =>
                     {
@@ -144,7 +186,6 @@ namespace Milky.OsbOptimizer.ViewModels
                     IsFinished = true;
                     compressor.ErrorOccured = null;
                     compressor.ProgressChanged = null;
-                    Dispose();
                 });
             }
         }
@@ -186,13 +227,26 @@ namespace Milky.OsbOptimizer.ViewModels
 
             }
         }
+        public ICommand OpenInfoCommand
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    var window = new DetailWindow(this);
+                    window.Show();
+                });
 
+            }
+        }
         public void Dispose()
         {
             _group?.Dispose();
             _compressor?.Dispose();
-            HoldingText?.Clear();
-            HoldingText = null;
+            SituationOutput?.Clear();
+            SituationOutput = null;
+            ErrorOutput?.Clear();
+            ErrorOutput = null;
             HoldingArg = null;
         }
     }
