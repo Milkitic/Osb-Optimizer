@@ -13,12 +13,10 @@
         <viewModels:OptimizeViewModel />
     </Window.DataContext>-->
     <Window.Resources>
-        <converters:StringBuilderToStringConverter x:Key="StringBuilderToStringConverter" />
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="TbSituationOutput"
-                 AcceptsReturn="True"
-                 Text="{Binding SituationOutput,Converter={StaticResource StringBuilderToStringConverter}}" />
+        <ListBox ItemsSource="{Binding SituationOutput,Mode=OneWay}">
 
+        </ListBox>
     </Grid>
 </Window>

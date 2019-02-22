@@ -13,7 +13,7 @@
     <Window.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter" />
         <converters:EnabledConverter x:Key="EnabledConverter" />
-        <converters:StringBuilderVisibilityConverter x:Key="StringBuilderVisibilityConverter" />
+        <converters:IconVisibilityConverter x:Key="StringBuilderVisibilityConverter" />
         <converters:BarWidthConverter x:Key="BarWidthConverter" />
         <converters:BarWidthConverter2 x:Key="BarWidthConverter2" />
  </Window.Resources>
@@ -21,11 +21,26 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
     <Grid>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="+ New Task" 
+        <Button HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
                 Height="38"
                 Padding="6,0"
                 Margin="6,6"
-                Command="{Binding AddCommand}"/>
+                BorderThickness="0"
+                Command="{Binding AddCommand}"
+                Style="{StaticResource RoundButtonStyle}" 
+                Background="{StaticResource LightGreyBrush40}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                            Margin="10,0">
+                    <Viewbox Width="22" Height="22">
+                        <ContentControl Template="{StaticResource WhitePlusControl}" />
+                    </Viewbox>
+                    <Label Foreground="{StaticResource LightBrush}"
+                           FontSize="15" FontWeight="Bold">Start new task...</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
         <ListView Margin="0,50,0,0"
                   Background="#363636"
                   BorderThickness="1"
@@ -96,7 +111,7 @@
                                             BorderThickness="0"
                                             Style="{StaticResource RoundButtonStyle}"
                                             Background="{StaticResource GreyBlueBrushA0}"
-                                            Visibility="{Binding SituationOutput,Converter={StaticResource StringBuilderVisibilityConverter}}"
+                                            Visibility="{Binding SituationCount,Converter={StaticResource StringBuilderVisibilityConverter}}"
                                             Command="{Binding OpenInfoCommand}">
                                         <Button.Content>
                                             <Viewbox Width="14" Height="14">
@@ -109,7 +124,7 @@
                                             BorderThickness="0"
                                             Style="{StaticResource RoundButtonStyle}"
                                             Background="{StaticResource GreyRedBrushA0}"
-                                            Visibility="{Binding ErrorOutput,Converter={StaticResource StringBuilderVisibilityConverter}}">
+                                            Visibility="{Binding ErrorCount,Converter={StaticResource StringBuilderVisibilityConverter}}">
                                         <Button.Content>
                                             <Viewbox Width="14" Height="14">
                                                 <ContentControl Template="{StaticResource GreyBugControl}" />

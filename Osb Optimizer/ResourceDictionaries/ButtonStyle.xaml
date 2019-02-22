@@ -8,13 +8,13 @@
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="Grid">
                             <Border Background="{StaticResource ExtraLightBrush}"
-                                    CornerRadius="50"
+                                    CornerRadius="19"
                                     x:Name="Border"
                                     Opacity="0">
                                 <ContentPresenter Content="{TemplateBinding Content}"/>
                             </Border>
                             <Border Background="{TemplateBinding Background}"
-                                    CornerRadius="50"
+                                    CornerRadius="19"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter Content="{TemplateBinding Content}"/>
@@ -26,6 +26,9 @@
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter TargetName="Grid" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

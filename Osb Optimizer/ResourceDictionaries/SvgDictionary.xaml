@@ -25,6 +25,12 @@
     <PathGeometry x:Key="PathOk"
                   Figures="M170.1 509.9c0 0-38.7-26.5-75.4 34.7l-81.6 106c0 0-18.4 40.8 34.7 69.3l277.3 210c0 0 34.7 34.7 75.4 34.7c30.6 0 63.2 0 63.2 0s71.4-2 104-69.3l418-727.9c0 0 22.4-40.8-34.7-69.3l-69.3-40.8c0 0-57.1-53-97.9 6.1L410.7 660.8c-40.8 57.1-85.6-8.2-85.6-8.2L170.1 509.9z"
                   FillRule="NonZero" />
+    <PathGeometry x:Key="PathPlus1"
+                  Figures="M117.5 392.6h764.9c59.4 0 107.5 48.1 107.5 107.5c0 59.4-48.1 107.5-107.5 107.5H117.5C58.1 607.6 10 559.5 10 500.1C10 440.7 58.1 392.6 117.5 392.6z"
+                  FillRule="NonZero" />
+    <PathGeometry x:Key="PathPlus2"
+                  Figures="M607.4 117.5v764.9c0 59.4-48.1 107.5-107.5 107.5c-59.4 0-107.5-48.1-107.5-107.5V117.5C392.4 58.1 440.5 10 499.9 10C559.3 10 607.4 58.1 607.4 117.5z"
+                  FillRule="NonZero" />
     <ControlTemplate x:Key="GreyCancelControl">
         <Canvas Width="1000" Height="1000">
             <Path Fill="{StaticResource LightBrush}" Data="{StaticResource PathGreyCancel}" />
@@ -44,6 +50,12 @@
     <ControlTemplate x:Key="GreyInfoControl">
         <Canvas Width="1000" Height="1000">
             <Path Fill="{StaticResource LightBrush}" Data="{StaticResource PathInfo}" />
+        </Canvas>
+    </ControlTemplate>
+    <ControlTemplate x:Key="WhitePlusControl">
+        <Canvas Width="1000" Height="1000">
+            <Path Fill="{StaticResource LightBrush}" Data="{StaticResource PathPlus1}" />
+            <Path Fill="{StaticResource LightBrush}" Data="{StaticResource PathPlus2}" />
         </Canvas>
     </ControlTemplate>
     <ControlTemplate x:Key="GreyBugControl">

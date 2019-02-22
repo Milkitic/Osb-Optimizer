@@ -21,10 +21,11 @@ namespace Milky.OsbOptimizer.Converters
                     return Visibility.Visible;
                 }
 
-                return Visibility.Collapsed;
+                return Visibility.Hidden;
             }
 
             return null;
+
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

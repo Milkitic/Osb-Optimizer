@@ -1,17 +1,18 @@
 ﻿using Microsoft.Win32;
+using Milky.OsbOptimizer.Windows;
 using Milky.WpfApi;
 using Milky.WpfApi.Commands;
 using OSharp.Storyboard;
 using OSharp.Storyboard.Events;
 using OSharp.Storyboard.Management;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Input;
-using Milky.OsbOptimizer.Windows;
 using ErrorEventArgs = OSharp.Storyboard.ErrorEventArgs;
 
 namespace Milky.OsbOptimizer.ViewModels
@@ -24,12 +25,12 @@ namespace Milky.OsbOptimizer.ViewModels
         private bool _isRunning;
         private bool _isFinished;
 
-        private StringBuilder _situationOutput;
-        private StringBuilder _errorOutput;
+        private ObservableCollection<string> _situationOutput;
+        private ObservableCollection<string> _errorOutput;
 
         private ElementGroup _group;
         private ElementCompressor _compressor;
-        private int tmp;
+        private int _tmpProgress;
 
         public string FilePath { get; }
         public string Name { get; }
@@ -90,15 +91,15 @@ namespace Milky.OsbOptimizer.ViewModels
             private set
             {
                 _progress = value;
-                if (tmp != (int)(_progress * 150))
+                if (_tmpProgress != (int)(_progress * 150))
                 {
                     OnPropertyChanged();
-                    tmp = (int)(_progress * 150);
+                    _tmpProgress = (int)(_progress * 150);
                 }
             }
         }
 
-        public StringBuilder SituationOutput
+        public ObservableCollection<string> SituationOutput
         {
             get => _situationOutput;
             set
@@ -107,7 +108,10 @@ namespace Milky.OsbOptimizer.ViewModels
                 OnPropertyChanged();
             }
         }
-        public StringBuilder ErrorOutput
+
+        public int? SituationCount => SituationOutput?.Count;
+
+        public ObservableCollection<string> ErrorOutput
         {
             get => _errorOutput;
             set
@@ -116,6 +120,7 @@ namespace Milky.OsbOptimizer.ViewModels
                 OnPropertyChanged();
             }
         }
+        public int? ErrorCount => ErrorOutput?.Count;
 
         public ErrorEventArgs HoldingArg { get; set; }
 
@@ -128,8 +133,8 @@ namespace Milky.OsbOptimizer.ViewModels
                     Dispose();
                     IsFinished = false;
                     IsRunning = true;
-                    SituationOutput = new StringBuilder();
-                    ErrorOutput = new StringBuilder();
+                    SituationOutput = new ObservableCollection<string>();
+                    ErrorOutput = new ObservableCollection<string>();
                     _group = await ElementGroup.ParseFromFileAsync(FilePath);
                     _compressor = new ElementCompressor(_group)
                     {
@@ -140,9 +145,8 @@ namespace Milky.OsbOptimizer.ViewModels
                     {
                         if (sender is Element element)
                         {
-                            ErrorOutput.AppendLine(element.ToString());
-                            ErrorOutput.AppendLine(e.Message);
-                            OnPropertyChanged(nameof(ErrorOutput));
+                            ErrorOutput.Add(element + Environment.NewLine + e.Message);
+                            OnPropertyChanged(nameof(ErrorCount));
                         }
                         //HoldingArg = e;
                         //HoldingText.AppendLine(e.Message);
@@ -155,21 +159,24 @@ namespace Milky.OsbOptimizer.ViewModels
                     };
                     compressor.SituationFound += (object sender, SituationEventArgs e) =>
                     {
-                        SituationOutput.AppendLine($"Found new element on line {e.Element.RowInSource}:");
-                        SituationOutput.AppendLine($"    {{{e.Element}}}");
+                        var sb = new StringBuilder();
+                        sb.AppendLine($"Found new element on line {e.Element.RowInSource}:");
+                        sb.AppendLine($"    {{{e.Element}}}");
 
                         if (e.Container != null)
                         {
-                            SituationOutput.AppendLine($"  Inner container:");
-                            SituationOutput.AppendLine($"    {{{e.Container}}}");
+                            sb.AppendLine($"  Inner container:");
+                            sb.AppendLine($"    {{{e.Container}}}");
                         }
 
-                        SituationOutput.AppendLine($"  Events involved:");
-                        SituationOutput.AppendLine(string.Join(Environment.NewLine, e.Events.Select(k => $"    {k}")));
-                        SituationOutput.AppendLine($"  Message:");
-                        SituationOutput.AppendLine($"    {e.Message}");
-                        SituationOutput.AppendLine();
-                        OnPropertyChanged(nameof(SituationOutput));
+                        sb.AppendLine($"  Events involved:");
+                        sb.AppendLine(string.Join(Environment.NewLine, e.Events.Select(k => $"    {k}")));
+                        sb.AppendLine($"  Message:");
+                        sb.AppendLine($"    {e.Message}");
+                        Execute.OnUiThread(() => { SituationOutput.Add(sb.ToString()); },
+                            MainWindow.SynchronizationContext);
+
+                        OnPropertyChanged(nameof(SituationCount));
                     };
                     compressor.ProgressChanged += (object sender, ProgressEventArgs e) =>
                     {
@@ -247,6 +254,8 @@ namespace Milky.OsbOptimizer.ViewModels
             SituationOutput = null;
             ErrorOutput?.Clear();
             ErrorOutput = null;
+            OnPropertyChanged(nameof(ErrorCount));
+            OnPropertyChanged(nameof(SituationCount));
             HoldingArg = null;
         }
     }
