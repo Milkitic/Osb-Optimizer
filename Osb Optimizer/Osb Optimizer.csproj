@@ -131,11 +131,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OSharp\OSharp.Storyboard\OSharp.Storyboard.csproj">
-      <Project>{25a54052-f9d9-456b-bca2-192097c6867b}</Project>
+    <ProjectReference Include="..\OSharp.Common\OSharp.Common.csproj">
+      <Project>{54a6ff61-14b8-4bf4-b927-cf193c61ce4c}</Project>
+      <Name>OSharp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSharp.Storyboard\OSharp.Storyboard.csproj">
+      <Project>{34bf2185-729c-48d9-801c-5cfa0741cca4}</Project>
       <Name>OSharp.Storyboard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\完整项目\Osu-Player\WpfApi\WpfApi.csproj">
+    <ProjectReference Include="..\WpfApi\WpfApi.csproj">
       <Project>{028e6f4e-d538-4b83-904c-c94c2f1e3c83}</Project>
       <Name>WpfApi</Name>
     </ProjectReference>

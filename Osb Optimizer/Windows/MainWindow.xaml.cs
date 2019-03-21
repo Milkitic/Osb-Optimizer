@@ -10,7 +10,6 @@ namespace Milky.OsbOptimizer.Windows
     public partial class MainWindow : Window
     {
         internal MainViewModel ViewModel { get; private set; }
-        internal static SynchronizationContext SynchronizationContext { get; private set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -19,7 +18,6 @@ namespace Milky.OsbOptimizer.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel = (MainViewModel)DataContext;
-            SynchronizationContext = SynchronizationContext.Current;
         }
     }
 }

@@ -173,8 +173,7 @@ namespace Milky.OsbOptimizer.ViewModels
                         sb.AppendLine(string.Join(Environment.NewLine, e.Events.Select(k => $"    {k}")));
                         sb.AppendLine($"  Message:");
                         sb.AppendLine($"    {e.Message}");
-                        Execute.OnUiThread(() => { SituationOutput.Add(sb.ToString()); },
-                            MainWindow.SynchronizationContext);
+                        Execute.OnUiThread(() => { SituationOutput.Add(sb.ToString()); });
 
                         OnPropertyChanged(nameof(SituationCount));
                     };
