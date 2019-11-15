@@ -159,6 +159,11 @@ namespace Milky.OsbOptimizer.ViewModels
                     };
                     compressor.SituationFound += (object sender, SituationEventArgs e) =>
                     {
+                        if (e.Element == null)
+                        {
+                            return;
+                        }
+
                         var sb = new StringBuilder();
                         sb.AppendLine($"Found new element on line {e.Element.RowInSource}:");
                         sb.AppendLine($"    {{{e.Element}}}");

@@ -15,9 +15,9 @@ namespace Milky.OsbOptimizer.ViewModels
         public ObservableCollection<OptimizeViewModel> Compressors { get; set; } =
             new ObservableCollection<OptimizeViewModel>()
             {
-                new OptimizeViewModel("E:\\Test\\why.bak"),
-                new OptimizeViewModel("E:\\Test\\why.bak"),
-                new OptimizeViewModel("E:\\Test\\why.bak")
+                //new OptimizeViewModel("E:\\Test\\why.bak"),
+                //new OptimizeViewModel("E:\\Test\\why.bak"),
+                //new OptimizeViewModel("E:\\Test\\why.bak")
             };
 
         public ICommand AddCommand
