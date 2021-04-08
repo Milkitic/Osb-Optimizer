@@ -1,23 +1,18 @@
-﻿using Microsoft.Win32;
-using Milky.OsbOptimizer.Windows;
-using Milky.WpfApi;
-using Milky.WpfApi.Commands;
-using OSharp.Storyboard;
-using OSharp.Storyboard.Events;
-using OSharp.Storyboard.Management;
+﻿using Coosu.Storyboard;
+using Coosu.Storyboard.Management;
+using Milki.OsbOptimizer.Windows;
+using Milki.Utils.WPF.Interaction;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows.Input;
-using ErrorEventArgs = OSharp.Storyboard.ErrorEventArgs;
+using ErrorEventArgs = Coosu.Storyboard.ErrorEventArgs;
 
-namespace Milky.OsbOptimizer.ViewModels
+namespace Milki.OsbOptimizer.ViewModels
 {
-    public class OptimizeViewModel : ViewModelBase, IDisposable
+    public class OptimizeViewModel : VmBase, IDisposable
     {
         private float _progress;
 

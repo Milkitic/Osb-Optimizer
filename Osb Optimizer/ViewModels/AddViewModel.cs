@@ -1,16 +1,10 @@
 ﻿using Microsoft.Win32;
-using Milky.WpfApi;
-using Milky.WpfApi.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Milki.Utils.WPF.Interaction;
 using System.Windows.Input;
 
-namespace Milky.OsbOptimizer.ViewModels
+namespace Milki.OsbOptimizer.ViewModels
 {
-    public class AddViewModel : ViewModelBase
+    public class AddViewModel : VmBase
     {
         private string _holdingPath;
 

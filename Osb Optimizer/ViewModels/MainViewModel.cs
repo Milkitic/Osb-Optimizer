@@ -1,16 +1,13 @@
-﻿using System;
-using Milky.WpfApi;
+﻿using Milki.OsbOptimizer.Windows;
+using Milki.Utils.WPF.Interaction;
+using System;
 using System.Collections.ObjectModel;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32;
-using Milky.OsbOptimizer.Windows;
-using Milky.WpfApi.Commands;
 
-namespace Milky.OsbOptimizer.ViewModels
+namespace Milki.OsbOptimizer.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : VmBase
     {
         public ObservableCollection<OptimizeViewModel> Compressors { get; set; } =
             new ObservableCollection<OptimizeViewModel>()

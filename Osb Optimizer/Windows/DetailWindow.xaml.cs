@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Milki.OsbOptimizer.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Milky.OsbOptimizer.ViewModels;
 
-namespace Milky.OsbOptimizer.Windows
+namespace Milki.OsbOptimizer.Windows
 {
     /// <summary>
     /// DetailWindow.xaml 的交互逻辑
@@ -31,7 +19,7 @@ namespace Milky.OsbOptimizer.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
+
         }
     }
 }

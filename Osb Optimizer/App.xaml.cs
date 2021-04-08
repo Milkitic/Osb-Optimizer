@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Milky.OsbOptimizer
+namespace Milki.OsbOptimizer
 {
     /// <summary>
     /// App.xaml 的交互逻辑

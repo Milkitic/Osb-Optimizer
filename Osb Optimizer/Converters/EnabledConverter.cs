@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Milky.OsbOptimizer.Converters
+namespace Milki.OsbOptimizer.Converters
 {
     class EnabledConverter : IMultiValueConverter
     {

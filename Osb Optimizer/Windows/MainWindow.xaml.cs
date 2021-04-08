@@ -1,8 +1,7 @@
-﻿using Milky.OsbOptimizer.ViewModels;
-using System.Threading;
+﻿using Milki.OsbOptimizer.ViewModels;
 using System.Windows;
 
-namespace Milky.OsbOptimizer.Windows
+namespace Milki.OsbOptimizer.Windows
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

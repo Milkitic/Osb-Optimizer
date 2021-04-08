@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Milky.OsbOptimizer.Converters
+namespace Milki.OsbOptimizer.Converters
 {
     class VisibilityConverter : IMultiValueConverter
     {
