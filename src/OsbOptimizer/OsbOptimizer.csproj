@@ -6,6 +6,7 @@
     <RootNamespace>Milki.OsbOptimizer</RootNamespace>
     <AssemblyName>OsbOptimizer</AssemblyName>
     <Authors>Milkitic</Authors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
