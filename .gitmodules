@@ -1,9 +1,0 @@
-[submodule "OSharp.Storyboard"]
-	path = OSharp.Storyboard
-	url = https://github.com/Milkitic/OSharp.Storyboard
-[submodule "WpfApi"]
-	path = WpfApi
-	url = https://github.com/Milkitic/WpfApi
-[submodule "OSharp.Common"]
-	path = OSharp.Common
-	url = https://github.com/Milkitic/OSharp.Common
