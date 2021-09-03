@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Milky.OsbOptimizer">
+    xmlns:local="clr-namespace:Milki.OsbOptimizer">
     <PathGeometry
         x:Key="PathGreyCancel"
         Figures="M990 139L861 10L499.5 371.5L141.8 13.8l-128 128l357.7 357.7L10 861l129 129l361.5-361.5l357.7 357.7l128-128L628.5 500.5L990 139z"

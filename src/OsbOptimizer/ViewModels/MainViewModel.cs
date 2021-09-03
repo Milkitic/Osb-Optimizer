@@ -1,9 +1,9 @@
-﻿using Milki.OsbOptimizer.Windows;
-using Milki.Utils.WPF.Interaction;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Milki.OsbOptimizer.Windows;
+using Milki.Utils.WPF.Interaction;
 
 namespace Milki.OsbOptimizer.ViewModels
 {

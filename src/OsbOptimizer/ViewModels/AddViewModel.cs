@@ -1,6 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using System.Windows.Input;
+using Microsoft.Win32;
 using Milki.Utils.WPF.Interaction;
-using System.Windows.Input;
 
 namespace Milki.OsbOptimizer.ViewModels
 {

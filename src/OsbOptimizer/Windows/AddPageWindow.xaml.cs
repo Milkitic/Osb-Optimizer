@@ -1,6 +1,6 @@
-﻿using Milki.OsbOptimizer.ViewModels;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
+using Milki.OsbOptimizer.ViewModels;
 
 namespace Milki.OsbOptimizer.Windows
 {

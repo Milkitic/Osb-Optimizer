@@ -1,14 +1,13 @@
-﻿using Coosu.Storyboard;
-using Coosu.Storyboard.Management;
-using Milki.OsbOptimizer.Windows;
-using Milki.Utils.WPF.Interaction;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using ErrorEventArgs = Coosu.Storyboard.ErrorEventArgs;
+using Coosu.Storyboard;
+using Coosu.Storyboard.Extensions.Optimizing;
+using Milki.OsbOptimizer.Windows;
+using Milki.Utils.WPF.Interaction;
 
 namespace Milki.OsbOptimizer.ViewModels
 {
@@ -23,8 +22,8 @@ namespace Milki.OsbOptimizer.ViewModels
         private ObservableCollection<string> _situationOutput;
         private ObservableCollection<string> _errorOutput;
 
-        private ElementGroup _group;
-        private ElementCompressor _compressor;
+        private Layer _group;
+        private SpriteCompressor _compressor;
         private int _tmpProgress;
 
         public string FilePath { get; }
@@ -33,8 +32,8 @@ namespace Milki.OsbOptimizer.ViewModels
 
         internal OptimizeViewModel()
         {
-
         }
+
         public OptimizeViewModel(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -117,7 +116,7 @@ namespace Milki.OsbOptimizer.ViewModels
         }
         public int? ErrorCount => ErrorOutput?.Count;
 
-        public ErrorEventArgs HoldingArg { get; set; }
+        public ProcessErrorEventArgs HoldingArg { get; set; }
 
         public ICommand StartCommand
         {
@@ -130,15 +129,34 @@ namespace Milki.OsbOptimizer.ViewModels
                     IsRunning = true;
                     SituationOutput = new ObservableCollection<string>();
                     ErrorOutput = new ObservableCollection<string>();
-                    _group = await ElementGroup.ParseFromFileAsync(FilePath);
-                    _compressor = new ElementCompressor(_group)
+                    _group = await Layer.ParseFromFileAsync(FilePath);
+                    _compressor = new SpriteCompressor(_group, new CompressSettings
                     {
                         ThreadCount = 2
-                    };
+                    });
                     var compressor = _compressor;
-                    compressor.ErrorOccured += (object sender, ErrorEventArgs e) =>
+
+
+                    compressor.ErrorOccured += OnCompressorOnErrorOccured;
+                    compressor.SituationFound += OnCompressorOnSituationFound;
+                    compressor.ProgressChanged += OnCompressorOnProgressChanged;
+
+                    await _compressor.CompressAsync();
+                    await _group.SaveScriptAsync(
+                        Path.Combine(Path.GetDirectoryName(FilePath),
+                            Path.GetFileNameWithoutExtension(FilePath) + ".osb"
+                        )
+                    );
+                    IsRunning = false;
+                    IsFinished = true;
+
+                    compressor.ErrorOccured -= OnCompressorOnErrorOccured;
+                    compressor.SituationFound -= OnCompressorOnSituationFound;
+                    compressor.ProgressChanged -= OnCompressorOnProgressChanged;
+
+                    void OnCompressorOnErrorOccured(object sender, ProcessErrorEventArgs e)
                     {
-                        if (sender is Element element)
+                        if (sender is Sprite element)
                         {
                             ErrorOutput.Add(element + Environment.NewLine + e.Message);
                             OnPropertyChanged(nameof(ErrorCount));
@@ -151,22 +169,22 @@ namespace Milki.OsbOptimizer.ViewModels
                         //{
                         //    Thread.Sleep(1);
                         //}
-                    };
-                    compressor.SituationFound += (object sender, SituationEventArgs e) =>
+                    }
+                    void OnCompressorOnSituationFound(object sender, SituationEventArgs e)
                     {
-                        if (e.Element == null)
+                        if (e.Sprite == null)
                         {
                             return;
                         }
 
                         var sb = new StringBuilder();
-                        sb.AppendLine($"Found new element on line {e.Element.RowInSource}:");
-                        sb.AppendLine($"    {{{e.Element}}}");
+                        sb.AppendLine($"Found new element on line {e.Sprite.RowInSource}:");
+                        sb.AppendLine($"    {{{e.Sprite}}}");
 
-                        if (e.Container != null)
+                        if (e.Host != null)
                         {
                             sb.AppendLine($"  Inner container:");
-                            sb.AppendLine($"    {{{e.Container}}}");
+                            sb.AppendLine($"    {{{e.Host}}}");
                         }
 
                         sb.AppendLine($"  Events involved:");
@@ -176,22 +194,11 @@ namespace Milki.OsbOptimizer.ViewModels
                         Execute.OnUiThread(() => { SituationOutput.Add(sb.ToString()); });
 
                         OnPropertyChanged(nameof(SituationCount));
-                    };
-                    compressor.ProgressChanged += (object sender, ProgressEventArgs e) =>
+                    }
+                    void OnCompressorOnProgressChanged(object sender, ProgressEventArgs e)
                     {
-                        //Thread.Sleep(1);
                         Progress = e.Progress / (float)e.TotalCount;
-                    };
-                    await _compressor.CompressAsync();
-                    await _group.SaveOsbFileAsync(
-                        Path.Combine(Path.GetDirectoryName(FilePath),
-                            Path.GetFileNameWithoutExtension(FilePath) + ".osb"
-                        )
-                    );
-                    IsRunning = false;
-                    IsFinished = true;
-                    compressor.ErrorOccured = null;
-                    compressor.ProgressChanged = null;
+                    }
                 });
             }
         }
@@ -247,7 +254,6 @@ namespace Milki.OsbOptimizer.ViewModels
         }
         public void Dispose()
         {
-            _group?.Dispose();
             _compressor?.Dispose();
             SituationOutput?.Clear();
             SituationOutput = null;

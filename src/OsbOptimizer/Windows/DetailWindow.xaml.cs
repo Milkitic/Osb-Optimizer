@@ -1,5 +1,5 @@
-﻿using Milki.OsbOptimizer.ViewModels;
-using System.Windows;
+﻿using System.Windows;
+using Milki.OsbOptimizer.ViewModels;
 
 namespace Milki.OsbOptimizer.Windows
 {
