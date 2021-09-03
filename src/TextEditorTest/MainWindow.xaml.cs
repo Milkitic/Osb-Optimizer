@@ -32,7 +32,7 @@ namespace TextEditorTest
         private void MainWindow_OnInitialized(object? sender, EventArgs e)
         {
             var text = File.ReadAllText(
-                @"G:\GitHub\ReOsuStoryboardPlayerFork\ReOsuStoryboardPlayer.Core.UnitTest\TestData\Camellia vs Akira Complex - Reality Distortion (rrtyui).osb"
+                @"D:\GitHub\ReOsuStoryboardPlayerFork\ReOsuStoryboardPlayer.Core.UnitTest\TestData\Camellia vs Akira Complex - Reality Distortion (rrtyui).osb"
                 //@"G:\GitHub\ReOsuStoryboardPlayerFork\ReOsuStoryboardPlayer.Core.UnitTest\TestData\IOSYS feat. 3L - Miracle-Hinacle (_lolipop).osb"
                 );
             TextEditor.Text = text;
