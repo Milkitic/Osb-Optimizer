@@ -14,24 +14,36 @@
         <viewModels:TaskViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*">
         <StackPanel Grid.ColumnSpan="2" Margin="8">
             <TextBlock Text="{Binding Name}" />
             <TextBlock Text="{Binding FilePath}" />
         </StackPanel>
-        <Grid Grid.Row="1" ColumnDefinitions="*,*">
-            <avaloniaEdit:TextEditor
-                x:Name="TextEditor1"
-                Grid.Column="0"
-                Background="#404040"
-                FontFamily="Consolas"
-                FontSize="13" />
-            <avaloniaEdit:TextEditor
-                x:Name="TextEditor2"
-                Grid.Column="1"
-                Background="#373737"
-                FontFamily="Consolas"
-                FontSize="13" />
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="3"
+            Orientation="Horizontal">
+            <Button Content="√" />
+            <Button Content="×" />
+        </StackPanel>
+        <Grid Grid.Row="2" ColumnDefinitions="*,*">
+            <Border Grid.Column="0" Background="#404040">
+                <avaloniaEdit:TextEditor
+                    x:Name="TextEditor1"
+                    Margin="3"
+                    FontFamily="Consolas"
+                    FontSize="13"
+                    IsReadOnly="True" />
+            </Border>
+            <Border Grid.Column="1" Background="#373737">
+                <avaloniaEdit:TextEditor
+                    x:Name="TextEditor2"
+                    Margin="3"
+                    FontFamily="Consolas"
+                    FontSize="13"
+                    IsReadOnly="True" />
+            </Border>
         </Grid>
     </Grid>
 

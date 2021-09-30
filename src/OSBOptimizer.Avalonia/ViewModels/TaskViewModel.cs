@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace OSBOptimizer.Avalonia.ViewModels
 {
-    [DebuggerDisplay("{Name}")]
+    [DebuggerDisplay("Name = {Name}")]
     public class TaskViewModel : ViewModelBase
     {
         private bool _isRunning;
@@ -19,8 +19,8 @@ namespace OSBOptimizer.Avalonia.ViewModels
 
         public TaskViewModel(string filePath)
         {
-            //if (string.IsNullOrWhiteSpace(filePath))
-            //    throw new ArgumentException("Path can not be empty.");
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("Path can not be empty.");
 
             //if (!File.Exists(filePath))
             //    throw new FileNotFoundException($"Can not find file: \"{filePath}\"");

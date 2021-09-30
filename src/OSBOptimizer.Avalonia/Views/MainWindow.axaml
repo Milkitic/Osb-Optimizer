@@ -25,7 +25,7 @@
 
     <Grid RowDefinitions="auto,*">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" MinWidth="250" />
+            <ColumnDefinition Width="330" MinWidth="250" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
