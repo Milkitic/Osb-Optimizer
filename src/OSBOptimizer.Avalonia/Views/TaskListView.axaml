@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:OSBOptimizer.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" 
+             FontSize="14"
+             x:Class="OSBOptimizer.Avalonia.Views.TaskListView">
+
+    <Design.DataContext>
+        <viewModels:TaskViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="*,Auto">
+        <StackPanel>
+            <TextBlock FontSize="16" Text="{Binding Name}"></TextBlock>
+            <TextBlock
+                Foreground="#A0FFFFFF"
+                Text="{Binding FilePath}"
+                TextWrapping="Wrap"
+                FontSize="12">
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Button Content="x"></Button>
+            <Button Content="| |"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
