@@ -1,11 +1,14 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:OSBOptimizer.Avalonia.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" 
-             FontSize="14"
-             x:Class="OSBOptimizer.Avalonia.Views.TaskListView">
+<UserControl
+    x:Class="OSBOptimizer.Avalonia.Views.TaskListView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:OSBOptimizer.Avalonia.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    FontSize="14"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <viewModels:TaskViewModel />
@@ -13,19 +16,17 @@
 
     <Grid ColumnDefinitions="*,Auto">
         <StackPanel>
-            <TextBlock FontSize="16" Text="{Binding Name}"></TextBlock>
+            <TextBlock FontSize="16" Text="{Binding Name}" />
             <TextBlock
+                FontSize="12"
                 Foreground="#A0FFFFFF"
                 Text="{Binding FilePath}"
-                TextWrapping="Wrap"
-                FontSize="12">
-            </TextBlock>
-
+                TextWrapping="Wrap" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">
-            <Button Content="x"></Button>
-            <Button Content="| |"></Button>
+            <Button Content="x" />
+            <Button Content="| |" />
         </StackPanel>
     </Grid>
 </UserControl>

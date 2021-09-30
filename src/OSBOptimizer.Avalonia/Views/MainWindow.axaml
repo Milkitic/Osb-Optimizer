@@ -1,21 +1,23 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:OSBOptimizer.Avalonia.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:OSBOptimizer.Avalonia.Views"
-        mc:Ignorable="d"
-        d:DesignWidth="800"
-        d:DesignHeight="550"
-        x:Class="OSBOptimizer.Avalonia.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        FontFamily="Segoe UI"
-        Width="1024" Height="570"
-        Background="#2d2d2d"
-        FontSize="14"
-        Foreground="White"
-        TextBlock.Foreground="White"
-        Title="OSB Optimizer">
+<Window
+    x:Class="OSBOptimizer.Avalonia.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:OSBOptimizer.Avalonia.Views"
+    xmlns:vm="using:OSBOptimizer.Avalonia.ViewModels"
+    Title="OSB Optimizer"
+    Width="1024"
+    Height="570"
+    d:DesignHeight="550"
+    d:DesignWidth="800"
+    Background="#2d2d2d"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    Foreground="White"
+    Icon="/Assets/avalonia-logo.ico"
+    TextBlock.Foreground="White"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
@@ -23,20 +25,21 @@
 
     <Grid RowDefinitions="auto,*">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="250" Width="300" />
+            <ColumnDefinition Width="300" MinWidth="250" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Content="+" Command="{Binding AddTask}" />
+            <Button Command="{Binding AddTask}" Content="+" />
         </StackPanel>
 
         <ListBox
-            Grid.Column="0"
             Grid.Row="1"
-            Foreground="White"
+            Grid.Column="0"
             Background="Transparent"
-            Selection="{Binding Selection}"
-            Items="{Binding Tasks}">
+            DoubleTapped="InputElement_OnDoubleTapped"
+            Foreground="White"
+            Items="{Binding Tasks}"
+            Selection="{Binding Selection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <views:TaskListView />
@@ -44,27 +47,31 @@
             </ListBox.ItemTemplate>
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Padding" Value="5"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="5" />
+                    <Setter Property="Tag" Value="PART_ListBoxItem" />
                 </Style>
             </ListBox.Styles>
         </ListBox>
 
         <GridSplitter
-            HorizontalAlignment="Right"
-            ResizeBehavior="CurrentAndNext"
-            ResizeDirection="Columns"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
             Width="4"
             MinWidth="3"
             Margin="1,0,-1,0"
-            ZIndex="10"
+            HorizontalAlignment="Right"
             Background="Transparent"
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.RowSpan="2">
-        </GridSplitter>
+            ResizeBehavior="CurrentAndNext"
+            ResizeDirection="Columns"
+            ZIndex="10" />
 
-        <views:TaskView DataContext="{Binding SelectedTask}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"></views:TaskView>
+        <views:TaskView
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            DataContext="{Binding SelectedTask}" />
     </Grid>
 </Window>
