@@ -57,7 +57,7 @@ namespace Milki.OsbOptimizer.CommandLine
                 Console.WriteLine($"Compressing file with {arguments.ThreadCount} threads...");
                 stopwatch.Restart();
                 await compressor.CompressAsync();
-                Console.WriteLine($"Done within {Math.Round(stopwatch.Elapsed.TotalMilliseconds, 2)}ms.");
+                Console.WriteLine($"Done in {Math.Round(stopwatch.Elapsed.TotalMilliseconds, 2)}ms.");
 
                 string outputPath;
                 if (arguments.OutputPath == default)
