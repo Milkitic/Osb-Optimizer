@@ -4,6 +4,7 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Coosu.Storyboard;
 using Coosu.Storyboard.Extensions.Optimizing;
@@ -12,6 +13,8 @@ namespace Milki.OsbOptimizer.CommandLine
 {
     internal class Program
     {
+        private static string? _version;
+
         private class Arguments
         {
             public int ThreadCount { get; set; }
@@ -31,7 +34,7 @@ namespace Milki.OsbOptimizer.CommandLine
                 new Argument<string>("--input-path", "Specified input path."),
             };
 
-            rootCommand.Description = "osb-optimizer commandline";
+            rootCommand.Description = "osb-optimizer commandline " + GetVersion();
             rootCommand.Handler = CommandHandler.Create<Arguments>(Execution);
 
             var ret = await rootCommand.InvokeAsync(args);
@@ -80,6 +83,20 @@ namespace Milki.OsbOptimizer.CommandLine
                 await Console.Error.WriteLineAsync($"Error occurs while executing: {e.Message}");
                 return -1;
             }
+        }
+        private static string GetVersion()
+        {
+            if (_version != null) return _version;
+
+            var assembly = Assembly.GetEntryAssembly();
+            //var nameAttr = (AssemblyProductAttribute)assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0];
+
+            var verAttr = ((AssemblyInformationalVersionAttribute)assembly.GetCustomAttributes(
+                typeof(AssemblyInformationalVersionAttribute), false)[0]).InformationalVersion;
+
+            _version = verAttr;
+
+            return _version;
         }
     }
 }
