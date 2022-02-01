@@ -7,11 +7,11 @@
     <AssemblyName>OSBOptimizer.CommandLine</AssemblyName>
     <Authors>Milkitic</Authors>
     <Copyright>Copyright © Milkitic 2021</Copyright>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coosu.Storyboard.Extensions" Version="2.1.1-beta.6" />
+    <PackageReference Include="Coosu.Storyboard.Extensions" Version="2.2.0-alpha.1" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
   </ItemGroup>
 
