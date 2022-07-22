@@ -10,11 +10,11 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.7" />
-    <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.4" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.7" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.7" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.7" />
+    <PackageReference Include="Avalonia" Version="0.10.17" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.12.2" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.17" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.17" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.17" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\TaskListView.axaml.cs">

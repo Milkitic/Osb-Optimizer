@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coosu.Storyboard.Extensions" Version="2.2.0-alpha.1" />
+    <PackageReference Include="Coosu.Storyboard.Extensions" Version="2.3.9" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
   </ItemGroup>
 
