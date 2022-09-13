@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Milky.OsbOptimizer">
+    xmlns:local="clr-namespace:Milki.OsbOptimizer">
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Background" Value="Transparent" />

@@ -1,0 +1,95 @@
+﻿<SyntaxDefinition name="C#" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <Color name="Section" fontWeight="bold" foreground="Red" exampleText="// comment" />
+    <Color name="Comment" foreground="Green" exampleText="// comment" />
+    <Color name="String" foreground="Blue" exampleText="string text = &quot;Hello, World!&quot;"/>
+	<Color name="CommandKeywords" fontWeight="bold" foreground="Blue" exampleText="if (a)"/>
+    <Color name="DeclarationKeywords" fontWeight="bold" foreground="DarkCyan" exampleText="object o;" />
+	<Color name="LayerKeywords" foreground="DarkCyan" exampleText="object o;" />
+	<Color name="OriginKeywords" foreground="DarkCyan" exampleText="if (a)"/>
+    <Color name="AnimationKeywords" fontWeight="bold"  foreground="Red" exampleText="if (a)"/>
+    <Color name="Variable" foreground="Maroon" exampleText="$param = 1" />
+	<Color name="NumberLiteral" foreground="DarkBlue" exampleText="3.1415f"/>
+	<!-- This is the main ruleset. -->
+    <RuleSet>
+		
+		<Span color="Comment">
+			<Begin>//</Begin>
+		</Span>
+		
+		<Span color="Section">
+			<Begin>\[</Begin>
+			<End>\]</End>
+		</Span>
+		
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- span for escape sequences -->
+				<Span begin="\\" end="."/>
+			</RuleSet>
+		</Span>
+        
+        <Keywords color="CommandKeywords">
+			<Word>F</Word>
+			<Word>S</Word>
+			<Word>V</Word>
+			<Word>M</Word>
+			<Word>C</Word>
+			<Word>R</Word>
+			<Word>P</Word>
+			<Word>L</Word>
+			<Word>T</Word>
+			<Word>MX</Word>
+			<Word>MY</Word>
+		</Keywords>
+
+        <Keywords color="OriginKeywords">
+            <Word>BottomLeft</Word>
+            <Word>BottomCentre</Word>
+            <Word>BottomRight</Word>
+            <Word>CentreLeft</Word>
+            <Word>Centre</Word>
+            <Word>CentreRight</Word>
+            <Word>TopLeft</Word>
+            <Word>TopCentre</Word>
+            <Word>TopRight</Word>
+		</Keywords>
+        
+        <Keywords color="LayerKeywords">
+			<Word>Background</Word>
+			<Word>Foreground</Word>
+			<Word>Fail</Word>
+			<Word>Pass</Word>
+		</Keywords>
+        
+        <Keywords color="DeclarationKeywords">
+			<Word>Sprite</Word>
+			<Word>Animation</Word>
+		</Keywords>
+        
+        <Keywords color="AnimationKeywords">
+			<Word>LoopOnce</Word>
+			<Word>LoopForever</Word>
+		</Keywords>
+
+		<Rule fontStyle="italic" foreground="#999">
+			([0-9]+?),([0-9]+?),LoopForever
+		</Rule>
+
+		<Rule color="Variable">
+			\$[\d\w_]+
+		</Rule>
+        
+		<!-- Digits -->
+		<Rule color="NumberLiteral">
+			\b0[xX][0-9a-fA-F]+  # hex number
+		|
+			(	\b\d+(\.[0-9]+)?   #number with optional floating point
+			|	\.[0-9]+           #or just starting with floating point
+			)
+			([eE][+-]?[0-9]+)? # optional exponent
+		</Rule>
+
+    </RuleSet>
+</SyntaxDefinition>

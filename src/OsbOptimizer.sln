@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29503.13
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsbOptimizer", "OsbOptimizer\OsbOptimizer.csproj", "{943813B1-4AF3-4AB0-9863-89B24B06A714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OsbOptimizer", "OsbOptimizer\OsbOptimizer.csproj", "{943813B1-4AF3-4AB0-9863-89B24B06A714}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextEditorTest", "TextEditorTest\TextEditorTest.csproj", "{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSBOptimizer.Avalonia", "OSBOptimizer.Avalonia\OSBOptimizer.Avalonia.csproj", "{64E49608-0727-424E-87B3-0D8F07BF3454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSBOptimizer.CommandLine", "OSBOptimizer.CommandLine\OSBOptimizer.CommandLine.csproj", "{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,30 @@ Global
 		{943813B1-4AF3-4AB0-9863-89B24B06A714}.Release|Any CPU.Build.0 = Release|Any CPU
 		{943813B1-4AF3-4AB0-9863-89B24B06A714}.Release|x64.ActiveCfg = Release|Any CPU
 		{943813B1-4AF3-4AB0-9863-89B24B06A714}.Release|x64.Build.0 = Release|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC14D01C-5686-41A5-B6E5-7A3E6C7D3445}.Release|x64.Build.0 = Release|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Debug|x64.Build.0 = Debug|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Release|x64.ActiveCfg = Release|Any CPU
+		{64E49608-0727-424E-87B3-0D8F07BF3454}.Release|x64.Build.0 = Release|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC381BE1-2396-4DB2-B0F4-4871CCFDCEAB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

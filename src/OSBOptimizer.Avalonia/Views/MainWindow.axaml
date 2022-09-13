@@ -1,0 +1,77 @@
+<Window
+    x:Class="OSBOptimizer.Avalonia.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:OSBOptimizer.Avalonia.Views"
+    xmlns:vm="using:OSBOptimizer.Avalonia.ViewModels"
+    Title="OSB Optimizer"
+    Width="1024"
+    Height="570"
+    d:DesignHeight="550"
+    d:DesignWidth="800"
+    Background="#2d2d2d"
+    FontFamily="Segoe UI"
+    FontSize="14"
+    Foreground="White"
+    Icon="/Assets/avalonia-logo.ico"
+    TextBlock.Foreground="White"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="auto,*">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330" MinWidth="250" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddTask}" Content="+" />
+        </StackPanel>
+
+        <ListBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="Transparent"
+            DoubleTapped="InputElement_OnDoubleTapped"
+            Foreground="White"
+            Items="{Binding Tasks}"
+            Selection="{Binding Selection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <views:TaskListView />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="5" />
+                    <Setter Property="Tag" Value="PART_ListBoxItem" />
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+
+        <GridSplitter
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Width="4"
+            MinWidth="3"
+            Margin="1,0,-1,0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            ResizeBehavior="CurrentAndNext"
+            ResizeDirection="Columns"
+            ZIndex="10" />
+
+        <views:TaskView
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            DataContext="{Binding SelectedTask}" />
+    </Grid>
+</Window>

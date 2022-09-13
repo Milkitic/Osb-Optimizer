@@ -4,22 +4,19 @@ using Milki.OsbOptimizer.ViewModels;
 namespace Milki.OsbOptimizer.Windows
 {
     /// <summary>
-    /// DetailWindow.xaml 的交互逻辑
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class DetailWindow : Window
+    public partial class MainWindowOld : Window
     {
-        private OptimizeViewModel ViewModel { get; }
-
-        public DetailWindow(OptimizeViewModel viewModel)
+        internal MainViewModel ViewModel { get; private set; }
+        public MainWindowOld()
         {
-            ViewModel = viewModel;
-            DataContext = viewModel;
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            ViewModel = (MainViewModel)DataContext;
         }
     }
 }
