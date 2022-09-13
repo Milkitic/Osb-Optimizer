@@ -52,21 +52,30 @@ namespace Milki.OsbOptimizer.CommandLine
                 var stopwatch = Stopwatch.StartNew();
                 var layer = await Layer.ParseFromFileAsync(arguments.InputPath);
                 Console.WriteLine($"Done within {Math.Round(stopwatch.Elapsed.TotalMilliseconds, 2)}ms.");
-                var compressor = new SpriteCompressor(layer, new CompressOptions
+                var compressor = new SpriteCompressor(layer, k =>
                 {
-                    ThreadCount = arguments.ThreadCount
+                    k.ThreadCount = arguments.ThreadCount;
                 });
 
                 Console.WriteLine($"Compressing file with {arguments.ThreadCount} threads...");
                 stopwatch.Restart();
                 await compressor.CompressAsync();
+
+                foreach (var layerSprite in layer.Sprites)
+                {
+                    if (layerSprite.ImagePath.Contains('/'))
+                    {
+                        layerSprite.ImagePath = layerSprite.ImagePath.Replace('/', '\\');
+                    }
+                }
+
                 Console.WriteLine($"Done in {Math.Round(stopwatch.Elapsed.TotalMilliseconds, 2)}ms.");
 
                 string outputPath;
                 if (arguments.OutputPath == default)
                 {
                     var filename = Path.GetFileNameWithoutExtension(arguments.InputPath);
-                    outputPath = $"./{filename}-optimized.osb";
+                    outputPath = $"./{filename}.osb";
                 }
                 else
                 {

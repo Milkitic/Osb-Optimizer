@@ -131,9 +131,9 @@ namespace Milki.OsbOptimizer.ViewModels
                     SituationOutput = new ObservableCollection<string>();
                     ErrorOutput = new ObservableCollection<string>();
                     _group = await Layer.ParseFromFileAsync(FilePath);
-                    _compressor = new SpriteCompressor(_group, new CompressOptions()
+                    _compressor = new SpriteCompressor(_group, k =>
                     {
-                        ThreadCount = 2
+                        k.ThreadCount = 2;
                     });
                     var compressor = _compressor;
 
